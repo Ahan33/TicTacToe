@@ -1,0 +1,178 @@
+def playera(board):
+    a = input("Please pick a square to put your X in: ")
+    if numbera(board,a):
+        return None
+    if checka(board,a):
+        return None
+
+
+    if a  == "1":
+        board[0][0] = "X"
+
+    if a == "2":
+        board[0][1] = "X"
+
+    if a == "3":
+        board[0][2] = "X"
+
+    if a == "4":
+        board[1][0] = "X"
+
+    if a == "5":
+        board[1][1] = "X"
+
+    if a == "6":
+        board[1][2] = "X"
+
+    if a == "7":
+        board[2][0] = "X"
+
+    if a == "8":
+        board[2][1] = "X"
+
+    if a == "9":
+        board[2][2] = "X"
+
+    for i in board:
+        print(i)
+def playerb(board):
+    b = input("Please pick a square to put your O in: ")
+    if numberb(board,b):
+        return None
+    if checkb(board,b):
+        return None
+
+    if b == "1":
+        board[0][0] = "O"
+
+    if b == "2":
+        board[0][1] = "O"
+
+    if b == "3":
+        board[0][2] = "O"
+
+    if b == "4":
+        board[1][0] = "O"
+
+    if b == "5":
+        board[1][1] = "O"
+
+    if b == "6":
+        board[1][2] = "O"
+
+    if b == "7":
+        board[2][0] = "O"
+
+    if b == "8":
+        board[2][1] = "O"
+
+    if b == "9":
+        board[2][2] = "O"
+
+
+def winner(board,a):
+    # Diagonal left to right
+    if board[0][0] == a and board[1][1] == a and board[2][2] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Diagonal right to left
+    if board[0][2] == a and board[1][1] == a and board[2][0] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Across the top
+    if board[0][0] == a and board[0][1] == a and board[0][2] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Across the middle
+    if board[1][0] == a and board[1][1] == a and board[1][2] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Across the bottom
+    if board[2][0] == a and board[2][1] == a and board[2][2] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Top to bottom first row
+    if board[0][0] == a and board[0][1] == a and board[0][2] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Top to bottom middle row
+    if board[0][1] == a and board[1][1] == a and board[2][1] == a:
+        print("You're a winner, Harry!")
+        return True
+    # Top to bottom last row
+    if board[0][2] == a and board[1][2] == a and board[2][2] == a:
+        print("You're a winner, Harry!")
+        return True
+
+def tie3(board):
+    tie = False
+    count = 0
+    for item in board:
+        for y in item:
+            if y == "O" or y =="X":
+                count = count + 1
+    if count == 9:
+        tie = True
+    return tie
+# To stop repeat number selections.
+def checka(board,x):
+    count = 0
+    x = int(x)
+    for i in board:
+        for y in i:
+            if x == y:
+                count += 1
+    if count < 1:
+        print("That number has already been selected, Dave.")
+        print(count)
+        playera(board)
+        return True
+def checkb(board,x):
+    count = 0
+    x = int(x)
+    for i in board:
+        for y in i:
+            if x == y:
+                count += 1
+    if count < 1:
+        print("That number has already been selected, Dave.")
+        print(count)
+        playerb(board)
+        return True
+# To check if only numbers in board are being picked 1-9
+def numbera(board, x):
+    if x == "1" or x == "2" or x == "3" or x == "4" or x == "5" or x == "6" or x == "7" or x == "8" or x == "9":
+        return False
+    else:
+        print("Please enter a number on the grid.")
+        playera(board)
+        return True
+def numberb(board, x):
+    if x == "1" or x == "2" or x == "3" or x == "4" or x == "5" or x == "6" or x == "7" or x == "8" or x == "9":
+        return False
+    else:
+        print("Please enter a number on the grid.")
+        playerb(board)
+        return True
+
+
+def game():
+    board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    for i in board:
+        print(i)
+
+    while True:
+        playera(board)
+        if winner(board,"X"):
+            break
+        if tie3(board):
+            print("You tied")
+            break
+        playerb(board)
+        if winner(board,"O"):
+            break
+        if tie3(board):
+            print("You tied")
+            break
+
+game()
